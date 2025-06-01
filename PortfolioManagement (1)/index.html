@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioPro | Advanced Investment Portfolio Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* Responsive Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            min-height: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.4s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .close:hover,
+        .close:focus {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+            box-sizing: border-box;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .auth-form .btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-footer {
+            text-align: center;
+            padding: 20px 30px;
+            border-top: 1px solid #e1e5e9;
+            background-color: #f8f9fa;
+        }
+
+        .modal-footer p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .modal-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Account Modal Specific Styles */
+        .account-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-item i {
+            color: #667eea;
+            font-size: 18px;
+            margin-right: 15px;
+            width: 20px;
+        }
+
+        .info-content h4 {
+            margin: 0 0 5px 0;
+            color: #495057;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-content p {
+            margin: 0;
+            color: #212529;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .account-actions .btn {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                max-width: none;
+            }
+
+            .modal-header {
+                padding: 20px 25px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
+                padding: 25px 20px;
+            }
+
+            .auth-form input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px 12px 12px 40px;
+            }
+
+            .auth-form .btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .close {
+                top: 12px;
+                right: 15px;
+                font-size: 24px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .modal-footer {
+                padding: 15px 20px;
+            }
+
+            .account-actions {
+                flex-direction: column;
+            }
+
+            .account-actions .btn {
+                flex: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                margin: 5% auto;
+                width: 98%;
+                border-radius: 8px;
+            }
+
+            .modal-header {
+                padding: 18px 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .modal-body {
+                padding: 20px 15px;
+            }
+
+            .auth-form input {
+                padding: 10px 10px 10px 35px;
+                font-size: 16px;
+            }
+
+            .form-group i {
+                left: 12px;
+                font-size: 14px;
+            }
+
+            .info-item {
+                padding: 12px;
+            }
+
+            .info-item i {
+                font-size: 16px;
+                margin-right: 12px;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .modal-content {
+                border: 2px solid #000;
+            }
+            
+            .auth-form input {
+                border-color: #000;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .modal,
+            .modal-content,
+            .close,
+            .btn-primary,
+            .btn-outline {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo animate-fade">
+                    <i class="fas fa-chart-line"></i>
+                    <span>PortfolioPro</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#dashboard" class="animate-fade delay-1">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#portfolio" class="animate-fade delay-1">
+                        <i class="fas fa-wallet"></i>
+                        <span>Portfolio</span>
+                    </a>
+                    <a href="#reports" class="animate-fade delay-2">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Reports</span>
+                    </a>
+                    <a id="open-account" class="animate-fade delay-2">
+                        <i class="fas fa-user"></i>
+                        <span>Account</span>
+                    </a>
+                    <a id="open-login" class="btn btn-primary animate-fade delay-3">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Sign In</span>
+                    </a>
+                    <a id="open-signup" class="btn btn-outline animate-fade delay-3">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Sign Up</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate-fade">Advanced Portfolio Management</h1>
+            <p class="animate-fade delay-1">Track, analyze, and optimize your investments with our comprehensive suite of portfolio management tools designed for modern investors.</p>
+            <div class="hero-buttons">
+                <a href="#get-started" class="btn btn-primary animate-fade delay-2">
+                    <i class="fas fa-rocket"></i>
+                    <span>Get Started</span>
+                </a>
+                <a href="#demo" class="btn btn-outline animate-fade delay-2">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Watch Demo</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title animate-fade">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Portfolio Overview</span>
+            </h2>
+            
+            <div class="portfolio-stats">
+                <div class="stat-card primary animate-fade">
+                    <div class="stat-title">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Total Portfolio Value</span>
+                    </div>
+                    <div class="stat-value">$148,765.42</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+2.4% today</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card success animate-fade delay-1">
+                    <div class="stat-title">
+                        <i class="fas fa-chart-line"></i>
+                        <span>YTD Return</span>
+                    </div>
+                    <div class="stat-value positive">+14.8%</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+1.2% vs S&P 500</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card warning animate-fade delay-1">
+                    <div class="stat-title">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Risk Level</span>
+                    </div>
+                    <div class="stat-value">Moderate</div>
+                    <div class="stat-change">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Balanced growth</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card info animate-fade delay-2">
+                    <div class="stat-title">
+                        <i class="fas fa-coins"></i>
+                        <span>Dividends</span>
+                    </div>
+                    <div class="stat-value">$2,450.20</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+8% YoY</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate-fade">
+                <div class="card-header">
+                    <span>
+                        <i class="fas fa-chart-line"></i>
+                        Portfolio Performance (12 Months)
+                    </span>
+                    <div class="card-header-actions">
+                        <button class="card-header-btn">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <button class="card-header-btn">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="allocation-container">
+                <div class="card animate-fade">
+                    <div class="card-header">
+                        <span>
+                            <i class="fas fa-pie-chart"></i>
+                            Asset Allocation
+                        </span>
+                        <div class="card-header-actions">
+                            <button class="card-header-btn">
+                                <i class="fas fa-sliders-h"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="allocationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card animate-fade delay-1">
+                    <div class="card-header">
+                        <span>
+                            <i class="fas fa-industry"></i>
+                            Sector Allocation
+                        </span>
+                        <div class="card-header-actions">
+                            <button class="card-header-btn">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="sectorChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card animate-fade delay-2">
+                <div class="card-header">
+                    <span>
+                        <i class="fas fa-list-ul"></i>
+                        Current Holdings
+                    </span>
+                    <div class="card-header-actions">
+                        <button class="card-header-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="card-header-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="holdings-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Shares</th>
+                                    <th>Avg Cost</th>
+                                    <th>Market Value</th>
+                                    <th>Gain/Loss</th>
+                                    <th>% of Portfolio</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Apple Inc.</strong>
+                                        <div class="text-muted">AAPL</div>
+                                    </td>
+                                    <td>32</td>
+                                    <td>$142.56</td>
+                                    <td>$5,856.00</td>
+                                    <td class="positive">+$1,024.32</td>
+                                    <td>19.7%</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-btn" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="table-btn" title="Trade">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Microsoft Corp.</strong>
+                                        <div class="text-muted">MSFT</div>
+                                    </td>
+                                    <td>18</td>
+                                    <td>$240.25</td>
+                                    <td>$4,725.00</td>
+                                    <td class="positive">+$450.00</td>
+                                    <td>15.9%</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-btn" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="table-btn" title="Trade">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Vanguard S&P 500 ETF</strong>
+                                        <div class="text-muted">VOO</div>
+                                    </td>
+                                    <td>52</td>
+                                    <td>$348.75</td>
+                                    <td>$18,720.00</td>
+                                    <td class="positive">+$1,560.00</td>
+                                    <td>37.6%</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-btn" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="table-btn" title="Trade">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Amazon.com Inc.</strong>
+                                        <div class="text-muted">AMZN</div>
+                                    </td>
+                                    <td>6</td>
+                                    <td>$3,100.50</td>
+                                    <td>$18,750.00</td>
+                                    <td class="negative">-$1,050.00</td>
+                                    <td>26.8%</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="table-btn" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="table-btn" title="Trade">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title animate-fade delay-2" style="margin-top: 3rem;">
+                <i class="fas fa-newspaper"></i>
+                <span>Market News</span>
+            </h2>
+            
+            <div class="news-container">
+                <div class="news-card animate-fade delay-1">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Stock Market News">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-source">
+                            <i class="fas fa-building"></i>
+                            Bloomberg
+                        </div>
+                        <h3 class="news-title">Tech Stocks Rally as Fed Signals Rate Hike Pause</h3>
+                        <div class="news-date">
+                            <i class="far fa-clock"></i>
+                            2 hours ago
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-card animate-fade delay-2">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Crypto News">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-source">
+                            <i class="fas fa-coins"></i>
+                            CoinDesk
+                        </div>
+                        <h3 class="news-title">Bitcoin Surges Past $30,000 Amid Banking Sector Concerns</h3>
+                        <div class="news-date">
+                            <i class="far fa-clock"></i>
+                            5 hours ago
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="news-card animate-fade delay-3">
+                    <div class="news-img">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Economy News">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-source">
+                            <i class="fas fa-globe"></i>
+                            Financial Times
+                        </div>
+                        <h3 class="news-title">Global Markets React to Unexpected Inflation Data</h3>
+                        <div class="news-date">
+                            <i class="far fa-clock"></i>
+                            1 day ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>PortfolioPro</h3>
+                    <p>Advanced portfolio management tools for modern investors. Track, analyze, and optimize your investments with ease.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Portfolio Tracker</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Investment Analytics</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Tax Optimization</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Risk Assessment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> API Reference</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Careers</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 PortfolioPro. All rights reserved. | Designed and Developed by Mayank Khandelwal</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <span class="close" id="close-login">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email Address" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" id="switch-to-signup">Create one here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <span class="close" id="close-signup">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Full Name" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email Address" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Confirm Password" required />
+                    </div>
+                    <button type="submit" class="btn btn-outline">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" id="switch-to-login">Sign in here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div id="account-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Account Details</h2>
+                <span class="close" id="close-account">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="account-info">
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <div class="info-content">
+                            <h4>Full Name</h4>
+                            <p>Saksham Khandelwal</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info-content">
+                            <h4>Email Address</h4>
+                            <p>saksham@portfoliopro.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="info-content">
+                            <h4>Member Since</h4>
+                            <p>January 15, 2024</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="info-content">
+                            <h4>Account Status</h4>
+                            <p>Premium Member</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="account-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Edit Profile
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p>Need help? <a href="#">Contact Support</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modals = {
+            login: document.getElementById('login-modal'),
+            signup: document.getElementById('signup-modal'),
+            account: document.getElementById('account-modal')
+        };
+
+        const triggers = {
+            openLogin: document.getElementById('open-login'),
+            openSignup: document.getElementById('open-signup'),
+            openAccount: document.getElementById('open-account'),
+            closeLogin: document.getElementById('close-login'),
+            closeSignup: document.getElementById('close-signup'),
+            closeAccount: document.getElementById('close-account'),
+            switchToSignup: document.getElementById('switch-to-signup'),
+            switchToLogin: document.getElementById('switch-to-login')
+        };
+
+        // Open modal functions
+        function openModal(modalName) {
+            // Close all modals first
+            Object.values(modals).forEach(modal => {
+                modal.style.display = 'none';
+            });
+            // Open the requested modal
+            modals[modalName].style.display = 'block';
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalName) {
+            modals[modalName].style.display = 'none';
+            // Re-enable body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeAllModals() {
+            Object.values(modals).forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners for opening modals
+        triggers.openLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('login');
+        });
+
+        triggers.openSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('signup');
+        });
+
+        triggers.openAccount.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('account');
+        });
+
+        // Event listeners for closing modals
+        triggers.closeLogin.addEventListener('click', () => closeModal('login'));
+        triggers.closeSignup.addEventListener('click', () => closeModal('signup'));
+        triggers.closeAccount.addEventListener('click', () => closeModal('account'));
+
+        // Event listeners for switching between login/signup
+        triggers.switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('signup');
+        });
+
+        triggers.switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('login');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal')) {
+                closeAllModals();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeAllModals();
+            }
+        });
+
+        // Form submissions (you can customize these)
+        document.querySelectorAll('.auth-form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                console.log('Form submitted');
+                // For demo purposes, close the modal
+                closeAllModals();
+            });
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartY = null;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!touchStartY) {
+                return;
+            }
+
+            let touchEndY = e.touches[0].clientY;
+            let diff = touchStartY - touchEndY;
+
+            // If swiping down significantly and modal is open
+            if (diff < -100) {
+                const openModal = Object.values(modals).find(modal => 
+                    modal.style.display === 'block'
+                );
+                if (openModal) {
+                    closeAllModals();
+                }
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            touchStartY = null;
+        });
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
