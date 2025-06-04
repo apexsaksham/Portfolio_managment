@@ -9,188 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css" />
     <style>
-        /* Original Modal Styles (from the version you liked with working auth/holdings) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.3s ease-out;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: #ffffff;
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 480px;
-            min-height: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.4s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .modal-body {
-            padding: 25px 30px;
-        }
-
-        .close {
-            color: white;
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .close:hover,
-        .close:focus {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .auth-form, .asset-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .form-group {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .form-group label {
-            font-weight: 600;
-            color: #495057;
-            font-size: 0.9rem;
-            margin-bottom: 2px;
-        }
-
-        .auth-form .form-group i, .asset-form .form-group i.input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            color: #667eea;
-            font-size: 16px;
-            z-index: 1;
-        }
-        .auth-form .form-group i {
-            transform: translateY(-50%);
-        }
-        .asset-form .form-group i.input-icon {
-            top: calc(50% + 10px);
-            transform: translateY(-50%);
-        }
-
-        .auth-form input, .asset-form input, .asset-form select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background-color: #f8f9fa;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-        .auth-form input {
-             padding-left: 45px;
-        }
-         .asset-form .form-group.has-icon input {
-            padding-left: 45px;
-        }
-
-        .auth-form input:focus, .asset-form input:focus, .asset-form select:focus {
-            outline: none;
-            border-color: #667eea;
-            background-color: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .auth-form .btn, .asset-form .btn {
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-        .btn-outline {
-            background: transparent;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-        .btn-outline:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-        .btn.btn-danger {
-            background-color: #e74a3b; color: white; border: 1px solid #e74a3b;
-        }
-        .btn.btn-danger:hover {
-            background-color: #c82333; border-color: #bd2130;
-            transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .modal-footer {
-            text-align: center;
-            padding: 20px 30px;
-            border-top: 1px solid #e1e5e9;
-            background-color: #f8f9fa;
-        }
+        /* Original Modal Styles (from the version with working auth/holdings) */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); animation: fadeIn 0.3s ease-out; overflow-y: auto; }
+        .modal-content { background-color: #ffffff; margin: 5% auto; padding: 0; border-radius: 12px; width: 90%; max-width: 480px; min-height: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: slideIn 0.4s ease-out; position: relative; overflow: hidden; }
+        .modal-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px 30px; text-align: center; position: relative; }
+        .modal-header h2 { margin: 0; font-size: 1.8rem; font-weight: 600; letter-spacing: 0.5px; }
+        .modal-body { padding: 25px 30px; }
+        .close { color: white; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255, 255, 255, 0.1); }
+        .close:hover, .close:focus { background: rgba(255, 255, 255, 0.2); transform: rotate(90deg); }
+        .auth-form, .asset-form { display: flex; flex-direction: column; gap: 18px; }
+        .form-group { position: relative; display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-weight: 600; color: #495057; font-size: 0.9rem; margin-bottom: 2px; }
+        .auth-form .form-group i, .asset-form .form-group i.input-icon { position: absolute; left: 15px; top: 50%; color: #667eea; font-size: 16px; z-index: 1; }
+        .auth-form .form-group i { transform: translateY(-50%); }
+        .asset-form .form-group i.input-icon { top: calc(50% + 10px); transform: translateY(-50%); }
+        .auth-form input, .asset-form input, .asset-form select { width: 100%; padding: 12px 15px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 16px; transition: all 0.3s ease; background-color: #f8f9fa; box-sizing: border-box; font-family: inherit; }
+        .auth-form input { padding-left: 45px; }
+        .asset-form .form-group.has-icon input { padding-left: 45px; }
+        .auth-form input:focus, .asset-form input:focus, .asset-form select:focus { outline: none; border-color: #667eea; background-color: white; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .auth-form .btn, .asset-form .btn { padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 10px; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); }
+        .btn-outline { background: transparent; color: #667eea; border: 2px solid #667eea; }
+        .btn-outline:hover { background: #667eea; color: white; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); }
+        .btn.btn-danger { background-color: #e74a3b; color: white; border: 1px solid #e74a3b; }
+        .btn.btn-danger:hover { background-color: #c82333; border-color: #bd2130; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .modal-footer { text-align: center; padding: 20px 30px; border-top: 1px solid #e1e5e9; background-color: #f8f9fa; }
         .modal-footer p { margin: 0; color: #6c757d; font-size: 14px; }
         .modal-footer a { color: #667eea; text-decoration: none; font-weight: 600; }
         .modal-footer a:hover { text-decoration: underline; }
-
         .account-info { display: flex; flex-direction: column; gap: 20px; }
         .info-item { display: flex; align-items: center; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea; }
         .info-item i { color: #667eea; font-size: 18px; margin-right: 15px; width: 20px; }
@@ -198,109 +45,29 @@
         .info-content p { margin: 0; color: #212529; font-size: 16px; font-weight: 500; }
         .account-actions { display: flex; gap: 15px; margin-top: 20px; }
         .account-actions .btn { flex: 1; padding: 12px; text-align: center; font-size: 14px; }
-        
-        .auth-message, .form-message {
-            text-align: center; padding: 10px; margin-top: 15px; border-radius: 5px;
-            font-size: 0.9em; display: none;
-        }
+        .auth-message, .form-message { text-align: center; padding: 10px; margin-top: 15px; border-radius: 5px; font-size: 0.9em; display: none; }
         .auth-message.success, .form-message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .auth-message.error, .form-message.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         .auth-message.info, .form-message.info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
-
-        .empty-holdings-message {
-            text-align: center; padding: 20px; color: #858796; font-style: italic;
-        }
-
+        .empty-holdings-message { text-align: center; padding: 20px; color: #858796; font-style: italic; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideIn { from { opacity: 0; transform: translateY(-50px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        /* ... Other original responsive/accessibility styles ... */
-
-
-        /* --- ENHANCED NEWS CARDS STYLES --- */
-        /* Define these CSS variables if they are not already globally defined in your style.css
-           or if you want these specific values for the news cards.
-           If they are in style.css, these might override or be redundant.
-           For this focused change, it's safer to include them here with fallbacks. */
-        :root {
-            --primary-color-news: #5E72E4; /* Example, adjust to your theme */
-            --dark-color-news: #212529;
-            --card-bg-news: #FFFFFF;
-            --text-muted-color-news: #8898aa;
-            --border-color-news: #e9ecef;
-        }
-
-        .news-container {
-            /* display: grid; Already in your style.css presumably */
-            /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); Already in style.css */
-            gap: 1.8rem !important; /* Increased gap, !important if needed to override style.css */
-            /* margin-top: 2rem; This was in original HTML structure, not CSS */
-        }
-
-        .news-card {
-            background: var(--card-bg-news, #FFFFFF);
-            border-radius: 0.6rem;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-            border: 1px solid var(--border-color-news, #e9ecef); /* Subtle border */
-        }
-
-        .news-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.1);
-        }
-
-        .news-img {
-            height: 180px; /* Consistent height */
-            overflow: hidden;
-        }
-
-        .news-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .news-card:hover .news-img img {
-            transform: scale(1.05);
-        }
-
-        .news-content {
-            padding: 1.25rem;
-        }
-
-        .news-source {
-            font-size: 0.8rem;
-            color: var(--primary-color-news, #5E72E4);
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .news-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--dark-color-news, #212529);
-            margin-bottom: 0.6rem;
-            line-height: 1.4;
-        }
-
-        .news-date {
-            font-size: 0.8rem;
-            color: var(--text-muted-color-news, #8898aa);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem; /* Replaces margin on icon */
-        }
-        /* --- END OF ENHANCED NEWS CARDS STYLES --- */
-
+        
+        /* Enhanced News Card Styles (as per your request) */
+        :root { --primary-color-news: #5E72E4; --dark-color-news: #212529; --card-bg-news: #FFFFFF; --text-muted-color-news: #8898aa; --border-color-news: #e9ecef; }
+        .news-container { gap: 1.8rem !important; }
+        .news-card { background: var(--card-bg-news, #FFFFFF); border-radius: 0.6rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.07); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; border: 1px solid var(--border-color-news, #e9ecef); }
+        .news-card:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(0,0,0,0.1); }
+        .news-img { height: 180px; overflow: hidden; }
+        .news-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .news-card:hover .news-img img { transform: scale(1.05); }
+        .news-content { padding: 1.25rem; }
+        .news-source { font-size: 0.8rem; color: var(--primary-color-news, #5E72E4); font-weight: 700; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.3rem; }
+        .news-title { font-size: 1.05rem; font-weight: 600; color: var(--dark-color-news, #212529); margin-bottom: 0.6rem; line-height: 1.4; }
+        .news-date { font-size: 0.8rem; color: var(--text-muted-color-news, #8898aa); display: flex; align-items: center; gap: 0.5rem; }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav class="navbar">
@@ -319,7 +86,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
      <section class="hero">
         <div class="container">
             <h1 class="animate-fade">Advanced Portfolio Management</h1>
@@ -331,27 +97,35 @@
         </div>
     </section>
 
-    <!-- Dashboard Section -->
     <section id="dashboard" class="dashboard">
         <div class="container">
             <h2 class="section-title animate-fade"><i class="fas fa-tachometer-alt"></i><span id="dashboard-title-main">Portfolio Overview</span></h2>
             
             <div class="portfolio-stats">
-                <div class="stat-card primary animate-fade"><div class="stat-title"><i class="fas fa-dollar-sign"></i><span>Total Portfolio Value</span></div><div class="stat-value">$148,765.42</div><div class="stat-change positive"><i class="fas fa-arrow-up"></i><span>+2.4% today</span></div></div>
-                <div class="stat-card success animate-fade delay-1"><div class="stat-title"><i class="fas fa-chart-line"></i><span>YTD Return</span></div><div class="stat-value positive">+14.8%</div><div class="stat-change positive"><i class="fas fa-arrow-up"></i><span>+1.2% vs S&P 500</span></div></div>
-                <div class="stat-card warning animate-fade delay-1"><div class="stat-title"><i class="fas fa-shield-alt"></i><span>Risk Level</span></div><div class="stat-value">Moderate</div><div class="stat-change"><i class="fas fa-info-circle"></i><span>Balanced growth</span></div></div>
-                <div class="stat-card info animate-fade delay-2"><div class="stat-title"><i class="fas fa-coins"></i><span>Dividends</span></div><div class="stat-value">$2,450.20</div><div class="stat-change positive"><i class="fas fa-arrow-up"></i><span>+8% YoY</span></div></div>
+                <div class="stat-card primary animate-fade">
+                    <div class="stat-title"><i class="fas fa-dollar-sign"></i><span>Total Portfolio Value</span></div>
+                    <div class="stat-value" id="overview-total-value">$0.00</div>
+                    <div class="stat-change" id="overview-total-value-change"><i class="fas fa-info-circle"></i><span>No holdings yet</span></div>
+                </div>
+                <div class="stat-card success animate-fade delay-1">
+                    <div class="stat-title"><i class="fas fa-chart-line"></i><span>Total Gain/Loss</span></div>
+                    <div class="stat-value" id="overview-total-gain-loss">$0.00</div>
+                    <div class="stat-change" id="overview-total-gain-loss-percent"><i class="fas fa-info-circle"></i><span>(0.00%)</span></div>
+                </div>
+                <div class="stat-card warning animate-fade delay-1">
+                    <div class="stat-title"><i class="fas fa-shield-alt"></i><span>Risk Level</span></div>
+                    <div class="stat-value">Moderate</div> <!-- This remains static -->
+                    <div class="stat-change"><i class="fas fa-info-circle"></i><span>Balanced growth</span></div>
+                </div>
+                <div class="stat-card info animate-fade delay-2">
+                    <div class="stat-title"><i class="fas fa-layer-group"></i><span>Holdings Count</span></div>
+                    <div class="stat-value" id="overview-num-holdings">0</div>
+                    <div class="stat-change" id="overview-holdings-diversity"><i class="fas fa-info-circle"></i><span>No assets yet</span></div>
+                </div>
             </div>
             
-            <div class="card animate-fade">
-                <div class="card-header"><span><i class="fas fa-chart-line"></i> Portfolio Performance (12 Months)</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-expand"></i></button><button class="card-header-btn"><i class="fas fa-download"></i></button></div></div>
-                <div class="card-body"><div class="chart-container"><canvas id="performanceChart"></canvas></div></div>
-            </div>
-            
-            <div class="allocation-container">
-                <div class="card animate-fade"><div class="card-header"><span><i class="fas fa-pie-chart"></i> Asset Allocation</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-sliders-h"></i></button></div></div><div class="card-body"><div class="chart-container"><canvas id="allocationChart"></canvas></div></div></div>
-                <div class="card animate-fade delay-1"><div class="card-header"><span><i class="fas fa-industry"></i> Sector Allocation</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-filter"></i></button></div></div><div class="card-body"><div class="chart-container"><canvas id="sectorChart"></canvas></div></div></div>
-            </div>
+            <div class="card animate-fade"> <div class="card-header"><span><i class="fas fa-chart-line"></i> Portfolio Performance (12 Months)</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-expand"></i></button><button class="card-header-btn"><i class="fas fa-download"></i></button></div></div> <div class="card-body"><div class="chart-container"><canvas id="performanceChart"></canvas></div></div> </div>
+            <div class="allocation-container"> <div class="card animate-fade"><div class="card-header"><span><i class="fas fa-pie-chart"></i> Asset Allocation</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-sliders-h"></i></button></div></div><div class="card-body"><div class="chart-container"><canvas id="allocationChart"></canvas></div></div></div> <div class="card animate-fade delay-1"><div class="card-header"><span><i class="fas fa-industry"></i> Sector Allocation</span><div class="card-header-actions"><button class="card-header-btn"><i class="fas fa-filter"></i></button></div></div><div class="card-body"><div class="chart-container"><canvas id="sectorChart"></canvas></div></div></div> </div>
             
             <div class="card animate-fade delay-2">
                 <div class="card-header">
@@ -368,7 +142,6 @@
                                 <tr><th>Asset</th><th>Shares</th><th>Avg Cost</th><th>Current Price</th><th>Market Value</th><th>Gain/Loss</th><th>% of Portfolio</th><th>Actions</th></tr>
                             </thead>
                             <tbody id="holdings-table-body">
-                                <!-- Static fallback row, JS will manage this -->
                                 <tr id="static-holding-row-example" style="display:none;"><td><strong>Example Stock</strong><div class="text-muted">EXMPL</div></td><td>10</td><td>$100.00</td><td>$110.00</td><td>$1,100.00</td><td class="positive">+$100.00</td><td>100%</td><td><div class="table-actions">-</div></td></tr>
                             </tbody>
                         </table>
@@ -377,50 +150,24 @@
                 </div>
             </div>
             
-            <!-- Market News Section (HTML from your original, styles will be applied from inline <style>) -->
-            <h2 class="section-title animate-fade delay-2" style="margin-top: 3rem;">
-                <i class="fas fa-newspaper"></i>
-                <span>Market News</span>
-            </h2>
-            <div class="news-container">
-                <div class="news-card animate-fade delay-1">
-                    <div class="news-img"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Stock Market News"></div>
-                    <div class="news-content"><div class="news-source"><i class="fas fa-building"></i> Bloomberg</div><h3 class="news-title">Tech Stocks Rally as Fed Signals Rate Hike Pause</h3><div class="news-date"><i class="far fa-clock"></i> 2 hours ago</div></div>
-                </div>
-                <div class="news-card animate-fade delay-2">
-                    <div class="news-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Crypto News"></div>
-                    <div class="news-content"><div class="news-source"><i class="fas fa-coins"></i> CoinDesk</div><h3 class="news-title">Bitcoin Surges Past $30,000 Amid Banking Sector Concerns</h3><div class="news-date"><i class="far fa-clock"></i> 5 hours ago</div></div>
-                </div>
-                <div class="news-card animate-fade delay-3">
-                    <div class="news-img"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Economy News"></div>
-                    <div class="news-content"><div class="news-source"><i class="fas fa-globe"></i> Financial Times</div><h3 class="news-title">Global Markets React to Unexpected Inflation Data</h3><div class="news-date"><i class="far fa-clock"></i> 1 day ago</div></div>
-                </div>
-            </div>
+            <h2 class="section-title animate-fade delay-2" style="margin-top: 3rem;"> <i class="fas fa-newspaper"></i> <span>Market News</span> </h2>
+            <div class="news-container"> <div class="news-card animate-fade delay-1"> <div class="news-img"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Stock Market News"></div> <div class="news-content"><div class="news-source"><i class="fas fa-building"></i> Bloomberg</div><h3 class="news-title">Tech Stocks Rally as Fed Signals Rate Hike Pause</h3><div class="news-date"><i class="far fa-clock"></i> 2 hours ago</div></div> </div> <div class="news-card animate-fade delay-2"> <div class="news-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Crypto News"></div> <div class="news-content"><div class="news-source"><i class="fas fa-coins"></i> CoinDesk</div><h3 class="news-title">Bitcoin Surges Past $30,000 Amid Banking Sector Concerns</h3><div class="news-date"><i class="far fa-clock"></i> 5 hours ago</div></div> </div> <div class="news-card animate-fade delay-3"> <div class="news-img"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Economy News"></div> <div class="news-content"><div class="news-source"><i class="fas fa-globe"></i> Financial Times</div><h3 class="news-title">Global Markets React to Unexpected Inflation Data</h3><div class="news-date"><i class="far fa-clock"></i> 1 day ago</div></div> </div> </div>
         </div>
     </section>
 
-    <!-- About Us, Careers, Legal, Contact Sections (HTML from your original) -->
     <section id="about" class="about-section"> <div class="container"> <h2 class="section-title">About PortfolioPro</h2> <div class="about-content"> <p>Founded in 2023, PortfolioPro is a cutting-edge investment management platform designed to empower modern investors with professional-grade portfolio tracking and analysis tools. Our mission is to democratize sophisticated investment strategies and make them accessible to everyone.</p> <div class="about-stats"> <div class="stat-item"><h3> $2.5B+</h3><p>Assets Tracked</p></div> <div class="stat-item"><h3>99.9%</h3><p>Uptime</p></div> </div> <h3>Our Team</h3> <p>Led by experienced professionals from top financial institutions and technology companies, our team combines deep financial expertise with innovative technology to deliver unparalleled investment management solutions.</p> </div> </div> </section>
     <section id="careers" class="careers-section"> <div class="container"> <h2 class="section-title">Join Our Team</h2> <div class="careers-content"> <p>We're building the future of investment management. Join our team of passionate professionals who are dedicated to revolutionizing how people manage their portfolios.</p> <div class="job-openings"></div> <div class="careers-cta"><ul><li>Email : saksham.s@projectmanager.com</li></ul></div> </div> </div> </section>
     <section id="privacy" class="legal-section"> <div class="container"> <h2 class="section-title">Privacy Policy</h2> <div class="legal-content"> <p><strong>Last Updated:</strong> January 1, 2025</p> <h3>Information We Collect</h3> <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This includes your name, email address, phone number, and financial account information necessary for portfolio tracking.</p> <h3>Your Rights</h3> <p>You have the right to access, update, or delete your personal information. You may also opt out of certain communications from us.</p> </div> </div> </section>
     <section id="terms" class="legal-section"> <div class="container"> <h2 class="section-title">Terms of Service</h2> <div class="legal-content"> <p><strong>Last Updated:</strong> January 1, 2025</p> <h3>Acceptance of Terms</h3> <p>By accessing and using PortfolioPro, you accept and agree to be bound by the terms and provision of this agreement.</p> <h3>Description of Service</h3> <p>PortfolioPro provides investment portfolio tracking, analysis, and management tools. Our services are designed for informational purposes and should not be considered as financial advice.</p> <h3>User Responsibilities</h3> <ul><li>Provide accurate and complete information</li><li>Maintain the confidentiality of your account credentials</li></ul> </div> </div> </section>
     <section id="contact" class="contact-section"> <div class="container"> <h2 class="section-title">Contact Us</h2> <div class="contact-content"> <div class="contact-info"> <div class="contact-item"><i class="fas fa-envelope"></i><div><h3>Email</h3><p>support@portfoliopro.com</p></div></div> </div> </div> </div> </section>
-
-    <!-- Footer (HTML from your original) -->
     <footer> <div class="container"> <div class="footer-grid"> <div class="footer-col"> <h3>PortfolioPro</h3> <p>Advanced portfolio management tools for modern investors. Track, analyze, and optimize your investments with ease.</p> <div class="social-links"> <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a> <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a> <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a> <a href="https://github.com/apexsaksham" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a> </div> </div> <div class="footer-col"><h3>Products</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-angle-right"></i> Portfolio Tracker</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Investment Analytics</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Tax Optimization</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Risk Assessment</a></li></ul></div> <div class="footer-col"><h3>Resources</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-angle-right"></i> Documentation</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Tutorials</a></li><li><a href="#"><i class="fas fa-angle-right"></i> API Reference</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Help Center</a></li></ul></div> <div class="footer-col"><h3>Company</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-angle-right"></i> About Us</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Careers</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Contact</a></li><li><a href="#"><i class="fas fa-angle-right"></i> Legal</a></li></ul></div> </div> <div class="footer-bottom"><p class="copyright">© 2025 PortfolioPro. All rights reserved. | Designed and Developed by Saksham Singh And Team</p></div> </div> </footer>
-
-    <!-- Modals (HTML from your previous working version) -->
     <div id="login-modal" class="modal"> <div class="modal-content"> <div class="modal-header"><h2>Welcome Back</h2><span class="close" id="close-login">×</span></div> <div class="modal-body"> <form class="auth-form" id="login-form"><div class="form-group"><i class="fas fa-envelope"></i><input type="email" id="login-email" placeholder="Email Address" required /></div><div class="form-group"><i class="fas fa-lock"></i><input type="password" id="login-password" placeholder="Password" required /></div><button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button></form> <div id="login-message" class="auth-message"></div> </div> <div class="modal-footer"><p>Don't have an account? <a href="#" id="switch-to-signup">Create one here</a></p></div> </div> </div>
     <div id="signup-modal" class="modal"> <div class="modal-content"> <div class="modal-header"><h2>Create Account</h2><span class="close" id="close-signup">×</span></div> <div class="modal-body"> <form class="auth-form" id="signup-form"><div class="form-group"><i class="fas fa-user"></i><input type="text" id="signup-fullname" placeholder="Full Name" required /></div><div class="form-group"><i class="fas fa-envelope"></i><input type="email" id="signup-email" placeholder="Email Address" required /></div><div class="form-group"><i class="fas fa-lock"></i><input type="password" id="signup-password" placeholder="Password" required /></div><div class="form-group"><i class="fas fa-lock"></i><input type="password" id="signup-confirm-password" placeholder="Confirm Password" required /></div><button type="submit" class="btn btn-outline"><i class="fas fa-user-plus"></i> Create Account</button></form> <div id="signup-message" class="auth-message"></div> </div> <div class="modal-footer"><p>Already have an account? <a href="#" id="switch-to-login">Sign in here</a></p></div> </div> </div>
     <div id="account-modal" class="modal"> <div class="modal-content"> <div class="modal-header"><h2 id="account-modal-title">Account Details</h2><span class="close" id="close-account">×</span></div> <div class="modal-body"> <div class="account-info"><div class="info-item"><i class="fas fa-user"></i><div class="info-content"><h4>Full Name</h4><p id="account-modal-fullname">Please log in</p></div></div><div class="info-item"><i class="fas fa-envelope"></i><div class="info-content"><h4>Email Address</h4><p id="account-modal-email">-</p></div></div><div class="info-item"><i class="fas fa-calendar-alt"></i><div class="info-content"><h4>Member Since</h4><p id="account-modal-membersince">-</p></div></div><div class="info-item"><i class="fas fa-shield-alt"></i><div class="info-content"><h4>Account Status</h4><p>User</p></div></div></div> <div class="account-actions" style="display:none;"><button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button><button class="btn btn-outline"><i class="fas fa-cog"></i> Settings</button></div> </div> <div class="modal-footer"><p>Need help? <a href="#">Contact Support</a></p></div> </div> </div>
     <div id="add-asset-modal" class="modal"> <div class="modal-content"> <div class="modal-header"><h2 id="add-asset-modal-title">Add New Holding</h2><span class="close" id="close-add-asset-modal">×</span></div> <div class="modal-body"> <form class="asset-form" id="add-asset-form"> <div class="form-group"><label for="asset-name-input">Asset Name</label><input type="text" id="asset-name-input" placeholder="e.g., Apple Inc." required /></div> <div class="form-group"><label for="asset-ticker-input">Ticker Symbol</label><input type="text" id="asset-ticker-input" placeholder="e.g., AAPL (optional)" /></div> <div class="form-group"><label for="asset-shares-input">Shares/Units</label><input type="number" id="asset-shares-input" placeholder="e.g., 10" step="any" required /></div> <div class="form-group"><label for="asset-avg-cost-input">Avg Cost/Share</label><input type="number" id="asset-avg-cost-input" placeholder="e.g., 150.75" step="0.01" required /></div> <div class="form-group"><label for="asset-current-price-input">Current Price/Share</label><input type="number" id="asset-current-price-input" placeholder="e.g., 170.20" step="0.01" required /></div> <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Holding</button> </form> <div id="add-asset-form-message" class="form-message"></div> </div> </div> </div>
 
     <script>
-        // --- START OF AUTH & DYNAMIC HOLDINGS SCRIPT (from previous correct version) ---
-        // This JavaScript should be identical to the one in the previous message
-        // where the dynamic holdings table and auth were working correctly.
-        // I will re-paste it here for completeness.
-
+        // --- START OF AUTH & DYNAMIC HOLDINGS SCRIPT (Fully Integrated) ---
         const modals = {
             login: document.getElementById('login-modal'),
             signup: document.getElementById('signup-modal'),
@@ -441,7 +188,47 @@
             closeAddAssetModal: document.getElementById('close-add-asset-modal')
         };
 
-        function openModal(modalName) {
+        // DOM Element Selectors
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const loginEmailInput = document.getElementById('login-email');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginMessageDiv = document.getElementById('login-message');
+        const signupFullnameInput = document.getElementById('signup-fullname');
+        const signupEmailInput = document.getElementById('signup-email');
+        const signupPasswordInput = document.getElementById('signup-password');
+        const signupConfirmPasswordInput = document.getElementById('signup-confirm-password');
+        const signupMessageDiv = document.getElementById('signup-message');
+        const accountLinkText = document.getElementById('account-link-text');
+        const logoutBtn = document.getElementById('logout-btn');
+        const dashboardTitleMain = document.getElementById('dashboard-title-main');
+        const accountModalFullname = document.getElementById('account-modal-fullname');
+        const accountModalEmail = document.getElementById('account-modal-email');
+        const accountModalMemberSince = document.getElementById('account-modal-membersince');
+        const accountModalTitle = document.getElementById('account-modal-title');
+        const accountActionsDiv = document.querySelector('#account-modal .account-actions');
+        const addAssetForm = document.getElementById('add-asset-form');
+        const addAssetFormMessageDiv = document.getElementById('add-asset-form-message');
+        const holdingsTableBody = document.getElementById('holdings-table-body');
+        const emptyHoldingsMessage = document.getElementById('empty-holdings-message');
+        const staticHoldingRowExample = document.getElementById('static-holding-row-example');
+        const assetNameInputEl = document.getElementById('asset-name-input');
+        const assetTickerInputEl = document.getElementById('asset-ticker-input');
+        const assetSharesInputEl = document.getElementById('asset-shares-input');
+        const assetAvgCostInputEl = document.getElementById('asset-avg-cost-input');
+        const assetCurrentPriceInputEl = document.getElementById('asset-current-price-input');
+
+        // Portfolio Overview Stat Card Elements
+        const overviewTotalValueEl = document.getElementById('overview-total-value');
+        const overviewTotalValueChangeEl = document.getElementById('overview-total-value-change');
+        const overviewTotalGainLossEl = document.getElementById('overview-total-gain-loss');
+        const overviewTotalGainLossPercentEl = document.getElementById('overview-total-gain-loss-percent');
+        const overviewNumHoldingsEl = document.getElementById('overview-num-holdings');
+        const overviewHoldingsDiversityEl = document.getElementById('overview-holdings-diversity');
+
+
+        // Modal Functions
+        function openModal(modalName) { /* ... (from previous correct version) ... */ 
             Object.values(modals).forEach(modal => { if (modal) modal.style.display = 'none'; });
             if (modals[modalName]) {
                 modals[modalName].style.display = 'block';
@@ -450,8 +237,8 @@
                 if (formMessageDiv) formMessageDiv.style.display = 'none';
             }
         }
-        function closeModal(modalName) {
-            if (modals[modalName]) {
+        function closeModal(modalName) { /* ... (from previous correct version, including asset form reset) ... */
+             if (modals[modalName]) {
                 modals[modalName].style.display = 'none';
                 const messageDiv = modals[modalName].querySelector('.auth-message, .form-message');
                 if (messageDiv) messageDiv.style.display = 'none';
@@ -462,7 +249,7 @@
             const isAnyModalOpen = Object.values(modals).some(modal => modal && modal.style.display === 'block');
             if (!isAnyModalOpen) document.body.style.overflow = 'auto';
         }
-        function closeAllModals() {
+        function closeAllModals() { /* ... (from previous correct version, including asset form reset) ... */ 
             Object.values(modals).forEach(modal => {
                 if (modal) {
                      modal.style.display = 'none';
@@ -476,15 +263,9 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Modal Event Listeners
         if (triggers.openLogin) triggers.openLogin.addEventListener('click', (e) => { e.preventDefault(); openModal('login'); });
         if (triggers.openSignup) triggers.openSignup.addEventListener('click', (e) => { e.preventDefault(); openModal('signup'); });
-        
-        const accountModalFullname = document.getElementById('account-modal-fullname');
-        const accountModalEmail = document.getElementById('account-modal-email');
-        const accountModalMemberSince = document.getElementById('account-modal-membersince');
-        const accountModalTitle = document.getElementById('account-modal-title');
-        const accountActionsDiv = document.querySelector('#account-modal .account-actions');
-
         if (triggers.openAccount) triggers.openAccount.addEventListener('click', (e) => {
             e.preventDefault();
             const currentUser = getCurrentUser();
@@ -500,30 +281,17 @@
                 openModal('account');
             } else { closeAllModals(); openModal('login'); }
         });
-
         if (triggers.closeLogin) triggers.closeLogin.addEventListener('click', () => closeModal('login'));
         if (triggers.closeSignup) triggers.closeSignup.addEventListener('click', () => closeModal('signup'));
         if (triggers.closeAccount) triggers.closeAccount.addEventListener('click', () => closeModal('account'));
         if (triggers.switchToSignup) triggers.switchToSignup.addEventListener('click', (e) => { e.preventDefault(); closeModal('login'); openModal('signup'); });
         if (triggers.switchToLogin) triggers.switchToLogin.addEventListener('click', (e) => { e.preventDefault(); closeModal('signup'); openModal('login'); });
-        
+        if (triggers.openAddAssetModalBtn) triggers.openAddAssetModalBtn.addEventListener('click', () => { if (!getCurrentUser()) { openModal('login'); return; } document.getElementById('add-asset-form').reset(); openModal('addAsset'); });
+        if (triggers.closeAddAssetModal) triggers.closeAddAssetModal.addEventListener('click', () => closeModal('addAsset'));
         window.addEventListener('click', (event) => { if (event.target.classList.contains('modal')) closeAllModals(); });
         document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeAllModals(); });
 
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const loginEmailInput = document.getElementById('login-email');
-        const loginPasswordInput = document.getElementById('login-password');
-        const loginMessageDiv = document.getElementById('login-message');
-        const signupFullnameInput = document.getElementById('signup-fullname');
-        const signupEmailInput = document.getElementById('signup-email');
-        const signupPasswordInput = document.getElementById('signup-password');
-        const signupConfirmPasswordInput = document.getElementById('signup-confirm-password');
-        const signupMessageDiv = document.getElementById('signup-message');
-        const accountLinkText = document.getElementById('account-link-text');
-        const logoutBtn = document.getElementById('logout-btn');
-        const dashboardTitleMain = document.getElementById('dashboard-title-main');
-
+        // Auth Helper Functions
         function getUsers() { const users = localStorage.getItem('portfolioProUsers'); return users ? JSON.parse(users) : []; }
         function saveUsers(users) { localStorage.setItem('portfolioProUsers', JSON.stringify(users)); }
         function getCurrentUser() { const user = sessionStorage.getItem('currentUser'); return user ? JSON.parse(user) : null; }
@@ -535,12 +303,13 @@
             element.style.display = 'block';
         }
 
+        // UI Update and Auth Form Logic
         function updateNavUI() {
             const currentUser = getCurrentUser();
             const navOpenLogin = document.getElementById('open-login');
             const navOpenSignup = document.getElementById('open-signup');
             const navOpenAccount = document.getElementById('open-account');
-            const staticHoldingRow = document.getElementById('static-holding-row-example'); 
+            // const staticHoldingRow = document.getElementById('static-holding-row-example'); // Already selected
 
             if (currentUser) {
                 if (navOpenLogin) navOpenLogin.style.display = 'none';
@@ -549,7 +318,7 @@
                 if (navOpenAccount) navOpenAccount.style.display = 'flex'; 
                 if (accountLinkText) accountLinkText.textContent = currentUser.fullName.split(' ')[0] || 'Account';
                 if (dashboardTitleMain) dashboardTitleMain.textContent = `${currentUser.fullName.split(' ')[0]}'s Portfolio Overview`;
-                if (staticHoldingRow) staticHoldingRow.style.display = 'none'; 
+                if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none'; 
                 loadUserHoldings();
             } else {
                 if (navOpenLogin) navOpenLogin.style.display = 'inline-flex';
@@ -563,7 +332,8 @@
                 if (accountModalMemberSince) accountModalMemberSince.textContent = "-";
                 if (accountModalTitle) accountModalTitle.textContent = "Account Details";
                 if (accountActionsDiv) accountActionsDiv.style.display = 'none';
-                clearHoldingsTable(true); 
+                clearHoldingsTable(true);
+                resetPortfolioOverviewStats();
             }
         }
 
@@ -575,15 +345,12 @@
                 const email = signupEmailInput.value.trim().toLowerCase();
                 const password = signupPasswordInput.value;
                 const confirmPassword = signupConfirmPasswordInput.value;
-
                 if (!fullName || !email || !password || !confirmPassword) { displayMessage(signupMessageDiv, 'All fields are required.'); return; }
                 if (password.length < 6) { displayMessage(signupMessageDiv, 'Password must be at least 6 characters.'); return; }
                 if (password !== confirmPassword) { displayMessage(signupMessageDiv, 'Passwords do not match.'); return; }
                 if (!/^\S+@\S+\.\S+$/.test(email)) { displayMessage(signupMessageDiv, 'Please enter a valid email.'); return; }
-
                 const users = getUsers();
                 if (users.find(user => user.email === email)) { displayMessage(signupMessageDiv, 'Email already registered.'); return; }
-
                 const newUser = { fullName, email, password, registeredAt: new Date().toISOString(), holdings: [] };
                 users.push(newUser);
                 saveUsers(users);
@@ -599,10 +366,8 @@
                 const email = loginEmailInput.value.trim().toLowerCase();
                 const password = loginPasswordInput.value;
                 if (!email || !password) { displayMessage(loginMessageDiv, 'Email and password are required.'); return; }
-
                 const users = getUsers();
                 const userIndex = users.findIndex(user => user.email === email);
-
                 if (userIndex > -1 && users[userIndex].password === password) {
                     const loggedInUser = users[userIndex];
                     if (!Array.isArray(loggedInUser.holdings)) {
@@ -628,31 +393,8 @@
             });
         }
         
-        const addAssetForm = document.getElementById('add-asset-form');
-        const addAssetFormMessageDiv = document.getElementById('add-asset-form-message');
-        const holdingsTableBody = document.getElementById('holdings-table-body');
-        const emptyHoldingsMessage = document.getElementById('empty-holdings-message');
-        const staticHoldingRowExample = document.getElementById('static-holding-row-example');
-
-        const assetNameInputEl = document.getElementById('asset-name-input');
-        const assetTickerInputEl = document.getElementById('asset-ticker-input');
-        const assetSharesInputEl = document.getElementById('asset-shares-input');
-        const assetAvgCostInputEl = document.getElementById('asset-avg-cost-input');
-        const assetCurrentPriceInputEl = document.getElementById('asset-current-price-input');
-
-        if (triggers.openAddAssetModalBtn) {
-            triggers.openAddAssetModalBtn.addEventListener('click', () => {
-                if (!getCurrentUser()) { openModal('login'); return; }
-                document.getElementById('add-asset-form').reset();
-                openModal('addAsset');
-            });
-        }
-        if (triggers.closeAddAssetModal) {
-            triggers.closeAddAssetModal.addEventListener('click', () => closeModal('addAsset'));
-        }
-
+        // Holdings Management Logic
         function generateHoldingId() { return '_' + Math.random().toString(36).substr(2, 9); }
-
         function saveUserHoldings(holdings) {
             const currentUser = getCurrentUser();
             if (!currentUser) return;
@@ -664,123 +406,108 @@
                 setCurrentUser(users[userIndex]);
             }
         }
-
         function loadUserHoldings() {
             const currentUser = getCurrentUser();
-            if (currentUser && Array.isArray(currentUser.holdings) && currentUser.holdings.length > 0) {
-                if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
-                renderHoldingsTable(currentUser.holdings);
-            } else if (currentUser) { 
-                if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
-                renderHoldingsTable([]);
-            } else { 
-                clearHoldingsTable(true);
-            }
+            const holdings = (currentUser && Array.isArray(currentUser.holdings)) ? currentUser.holdings : [];
+            if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
+            renderHoldingsTable(holdings);
         }
-        
         function clearHoldingsTable(showStaticFallback = false) {
             if (holdingsTableBody) holdingsTableBody.innerHTML = '';
             if (emptyHoldingsMessage) emptyHoldingsMessage.style.display = 'none';
             if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
-
-            if (showStaticFallback) {
-                 if (emptyHoldingsMessage && (!holdingsTableBody || holdingsTableBody.children.length === 0)) {
-                     emptyHoldingsMessage.style.display = 'block';
-                 }
-                 // If you want the static row to appear when logged out:
-                 // if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'table-row';
-            } else if (holdingsTableBody && holdingsTableBody.children.length === 0) {
+            if (showStaticFallback && emptyHoldingsMessage && (!holdingsTableBody || holdingsTableBody.children.length === 0)) {
+                 emptyHoldingsMessage.style.display = 'block';
+            } else if (!showStaticFallback && holdingsTableBody && holdingsTableBody.children.length === 0) {
                  if (emptyHoldingsMessage) emptyHoldingsMessage.style.display = 'block';
             }
+            resetPortfolioOverviewStats(); 
         }
-
+        function resetPortfolioOverviewStats() {
+            if (overviewTotalValueEl) overviewTotalValueEl.textContent = '$0.00';
+            if (overviewTotalValueChangeEl) overviewTotalValueChangeEl.innerHTML = '<i class="fas fa-info-circle"></i><span>No holdings yet</span>';
+            if (overviewTotalGainLossEl) { overviewTotalGainLossEl.textContent = '$0.00'; overviewTotalGainLossEl.classList.remove('positive', 'negative'); }
+            if (overviewTotalGainLossPercentEl) { overviewTotalGainLossPercentEl.innerHTML = '<i class="fas fa-info-circle"></i><span>(0.00%)</span>'; overviewTotalGainLossPercentEl.classList.remove('positive', 'negative'); }
+            if (overviewNumHoldingsEl) overviewNumHoldingsEl.textContent = '0';
+            if (overviewHoldingsDiversityEl) overviewHoldingsDiversityEl.innerHTML = '<i class="fas fa-info-circle"></i><span>No assets yet</span>';
+        }
+        function updatePortfolioOverviewStats(holdings) {
+            if (!Array.isArray(holdings)) { resetPortfolioOverviewStats(); return; }
+            let totalMarketValue = 0;
+            let totalCostBasis = 0;
+            const assetTypes = new Set();
+            holdings.forEach(holding => {
+                const shares = parseFloat(holding.shares) || 0;
+                const avgCost = parseFloat(holding.avgCost) || 0;
+                const currentPrice = parseFloat(holding.currentPrice) || 0;
+                totalMarketValue += shares * currentPrice;
+                totalCostBasis += shares * avgCost;
+                if(holding.ticker){ assetTypes.add(holding.ticker.toUpperCase().substring(0,4)); } 
+                else if (holding.name) { assetTypes.add(holding.name.split(" ")[0]); }
+            });
+            const totalGainLoss = totalMarketValue - totalCostBasis;
+            const totalGainLossPercent = totalCostBasis > 0 ? (totalGainLoss / totalCostBasis * 100) : 0;
+            if (overviewTotalValueEl) overviewTotalValueEl.textContent = `$${totalMarketValue.toFixed(2)}`;
+            if (overviewTotalValueChangeEl) overviewTotalValueChangeEl.innerHTML = `<i class="fas fa-info-circle"></i><span>Based on ${holdings.length} holding${holdings.length === 1 ? '' : 's'}</span>`;
+            if (overviewTotalGainLossEl) { overviewTotalGainLossEl.textContent = `${totalGainLoss >= 0 ? '+' : ''}$${totalGainLoss.toFixed(2)}`; overviewTotalGainLossEl.classList.toggle('positive', totalGainLoss >= 0); overviewTotalGainLossEl.classList.toggle('negative', totalGainLoss < 0); }
+            if (overviewTotalGainLossPercentEl) { overviewTotalGainLossPercentEl.innerHTML = `<i class="fas fa-arrow-${totalGainLoss >= 0 ? 'up' : 'down'}"></i><span>(${totalGainLossPercent.toFixed(2)}%)</span>`; overviewTotalGainLossPercentEl.classList.toggle('positive', totalGainLoss >= 0); overviewTotalGainLossPercentEl.classList.toggle('negative', totalGainLoss < 0); }
+            if (overviewNumHoldingsEl) overviewNumHoldingsEl.textContent = holdings.length;
+            if (overviewHoldingsDiversityEl) { overviewHoldingsDiversityEl.innerHTML = `<i class="fas fa-info-circle"></i><span>${assetTypes.size} distinct asset groups</span>`; }
+            if (holdings.length === 0) { resetPortfolioOverviewStats(); }
+        }
         function renderHoldingsTable(holdings) {
             if (!holdingsTableBody) return;
             holdingsTableBody.innerHTML = ''; 
-
             if (!holdings || holdings.length === 0) {
                 if (emptyHoldingsMessage) emptyHoldingsMessage.style.display = 'block';
                 if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
+                updatePortfolioOverviewStats([]);
                 return;
             }
             if (emptyHoldingsMessage) emptyHoldingsMessage.style.display = 'none';
             if (staticHoldingRowExample) staticHoldingRowExample.style.display = 'none';
-
-            let totalPortfolioMarketValue = 0;
+            let totalPortfolioMarketValueForPercentage = 0;
+            holdings.forEach(holding => { const shares = parseFloat(holding.shares) || 0; const currentPrice = parseFloat(holding.currentPrice) || 0; totalPortfolioMarketValueForPercentage += shares * currentPrice; });
             holdings.forEach(holding => {
                 const shares = parseFloat(holding.shares) || 0;
                 const avgCost = parseFloat(holding.avgCost) || 0;
                 const currentPrice = parseFloat(holding.currentPrice) || 0;
                 const marketValue = shares * currentPrice;
                 const gainLoss = marketValue - (shares * avgCost);
-                totalPortfolioMarketValue += marketValue;
-
+                const percentageOfPortfolio = totalPortfolioMarketValueForPercentage > 0 ? (marketValue / totalPortfolioMarketValueForPercentage * 100).toFixed(1) : 0;
                 const row = holdingsTableBody.insertRow();
                 row.dataset.holdingId = holding.id;
-                row.innerHTML = `
-                    <td><strong>${holding.name}</strong>${holding.ticker ? `<div class="text-muted">${holding.ticker.toUpperCase()}</div>` : ''}</td>
-                    <td>${shares.toLocaleString()}</td>
-                    <td>$${avgCost.toFixed(2)}</td>
-                    <td>$${currentPrice.toFixed(2)}</td>
-                    <td>$${marketValue.toFixed(2)}</td>
-                    <td class="${gainLoss >= 0 ? 'positive' : 'negative'}">$${gainLoss.toFixed(2)}</td>
-                    <td class="holding-percentage">-</td>
-                    <td><div class="table-actions"><button class="table-btn delete-holding-btn" title="Delete Holding"><i class="fas fa-trash-alt"></i></button></div></td>
-                `;
+                row.innerHTML = `<td><strong>${holding.name}</strong>${holding.ticker ? `<div class="text-muted">${holding.ticker.toUpperCase()}</div>` : ''}</td><td>${shares.toLocaleString()}</td><td>$${avgCost.toFixed(2)}</td><td>$${currentPrice.toFixed(2)}</td><td>$${marketValue.toFixed(2)}</td><td class="${gainLoss >= 0 ? 'positive' : 'negative'}">$${gainLoss.toFixed(2)}</td><td>${percentageOfPortfolio}%</td><td><div class="table-actions"><button class="table-btn delete-holding-btn" title="Delete Holding"><i class="fas fa-trash-alt"></i></button></div></td>`;
             });
-
-            holdings.forEach((holding, index) => {
-                const shares = parseFloat(holding.shares) || 0;
-                const currentPrice = parseFloat(holding.currentPrice) || 0;
-                const marketValue = shares * currentPrice;
-                const percentage = totalPortfolioMarketValue > 0 ? (marketValue / totalPortfolioMarketValue * 100).toFixed(1) : 0;
-                if (holdingsTableBody.rows[index] && holdingsTableBody.rows[index].cells[6]) {
-                     holdingsTableBody.rows[index].cells[6].textContent = `${percentage}%`;
-                }
-            });
-
+            updatePortfolioOverviewStats(holdings);
             document.querySelectorAll('.delete-holding-btn').forEach(btn => btn.addEventListener('click', handleDeleteHolding));
         }
-
-        if (addAssetForm) {
+        if (addAssetForm) { 
             addAssetForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 if (addAssetFormMessageDiv) addAssetFormMessageDiv.style.display = 'none';
                 const currentUser = getCurrentUser();
                 if (!currentUser) { displayMessage(addAssetFormMessageDiv, 'You must be logged in.', 'error'); return; }
-
-                const name = assetNameInputEl.value.trim();
-                const ticker = assetTickerInputEl.value.trim();
-                const shares = assetSharesInputEl.value;
-                const avgCost = assetAvgCostInputEl.value;
-                const currentPrice = assetCurrentPriceInputEl.value;
-
-                if (!name || !shares || !avgCost || !currentPrice || 
-                    isNaN(parseFloat(shares)) || parseFloat(shares) <= 0 ||
-                    isNaN(parseFloat(avgCost)) || parseFloat(avgCost) < 0 ||
-                    isNaN(parseFloat(currentPrice)) || parseFloat(currentPrice) < 0) {
-                    displayMessage(addAssetFormMessageDiv, 'Please fill all fields with valid numbers (shares > 0).', 'error');
-                    return;
-                }
-
+                const name = assetNameInputEl.value.trim(); // Corrected variable name
+                const ticker = assetTickerInputEl.value.trim(); // Corrected variable name
+                const shares = assetSharesInputEl.value; // Corrected variable name
+                const avgCost = assetAvgCostInputEl.value; // Corrected variable name
+                const currentPrice = assetCurrentPriceInputEl.value; // Corrected variable name
+                if (!name || !shares || !avgCost || !currentPrice || isNaN(parseFloat(shares)) || parseFloat(shares) <= 0 || isNaN(parseFloat(avgCost)) || parseFloat(avgCost) < 0 || isNaN(parseFloat(currentPrice)) || parseFloat(currentPrice) < 0) { displayMessage(addAssetFormMessageDiv, 'Please fill all fields with valid numbers (shares > 0).', 'error'); return; }
                 const newHolding = { id: generateHoldingId(), name, ticker, shares, avgCost, currentPrice };
                 let userHoldings = Array.isArray(currentUser.holdings) ? [...currentUser.holdings] : [];
                 userHoldings.push(newHolding);
-                
                 saveUserHoldings(userHoldings);
                 displayMessage(addAssetFormMessageDiv, 'Holding added successfully!', 'success');
-                
                 setTimeout(() => { closeModal('addAsset'); renderHoldingsTable(userHoldings); }, 1500);
             });
         }
-
         function handleDeleteHolding(event) {
             const rowElement = event.currentTarget.closest('tr');
             if (!rowElement) return;
             const holdingIdToDelete = rowElement.dataset.holdingId;
             const currentUser = getCurrentUser();
             if (!currentUser || !Array.isArray(currentUser.holdings)) return;
-
             if (confirm('Are you sure you want to delete this holding?')) {
                 const updatedHoldings = currentUser.holdings.filter(h => h.id !== holdingIdToDelete);
                 saveUserHoldings(updatedHoldings);
@@ -792,10 +519,12 @@
             updateNavUI();
             console.warn("WARNING: User credentials and holdings data are stored in localStorage. NOT SECURE for production.");
         });
-        updateNavUI(); // Initial call
+        updateNavUI(); 
         // --- END OF SCRIPT ---
     </script>
 
     <script src="js/main.js"></script> 
 </body>
 </html>
+
+
